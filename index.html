@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Untitled</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Social Media UI with Sign In</title>
+  <!-- Google Fonts and Material Icons for Social Media UI -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Social Media UI styles -->
+  <style>
+    /* General Reset */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f7f7f7;
+      color: #333;
+    }
+    /* Top Navigation Bar */
+    .top-nav {
+      background: linear-gradient(135deg, #4a90e2, #50e3c2);
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+    .top-nav .icons {
+      display: flex;
+      gap: 15px;
+      font-size: 28px;
+      cursor: pointer;
+    }
+    .top-nav .search {
+      flex: 1;
+      margin: 0 10px;
+      position: relative;
+    }
+    .top-nav .search input {
+      width: 100%;
+      padding: 8px 40px 8px 15px;
+      border: none;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+    .top-nav .search .material-icons {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #aaa;
+      font-size: 24px;
+    }
+    /* Content Area */
+    .content {
+      padding: 80px 20px 80px;
+    }
+    .post {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      padding: 15px;
+    }
+    .post-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .post-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+      border: 2px solid #4a90e2;
+    }
+    .post-header .user-info {
+      font-weight: 600;
+      font-size: 16px;
+    }
+    .post-header .user-info span {
+      display: block;
+      font-weight: 400;
+      font-size: 12px;
+      color: #666;
+    }
+    .post img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .likes {
+      color: #e74c3c;
+      font-weight: 600;
+    }
+    /* Floating Buttons */
+    .floating-btn, .camera-btn {
+      position: fixed;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .floating-btn {
+      bottom: 80px;
+      background: #e74c3c;
+      font-size: 32px;
+    }
+    .camera-btn {
+      bottom: 150px;
+      background: #50e3c2;
+      font-size: 28px;
+    }
+    /* Bottom Navigation Bar */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #fff;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+    .bottom-nav .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 24px;
+      color: #666;
+      cursor: pointer;
+    }
+    .bottom-nav .nav-item.active {
+      color: #4a90e2;
+    }
+    .bottom-nav .nav-item span {
+      font-size: 10px;
+      margin-top: 2px;
+    }
+  </style>
+  <!-- Sign In Page styles -->
+  <style>
+    /* Sign in styles */
+    #login-container {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #8ac6ff, #ffffff);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    #login-container h1 {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+    #login-container h2 {
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    #login-container form {
+      width: 90%;
+      max-width: 350px;
+      text-align: center;
+    }
+    #login-container input {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      background: #e0e0e0;
+      text-align: center;
+      font-weight: 500;
+      outline: none;
+      transition: 0.3s;
+    }
+    #login-container input:focus {
+      background: #d6d6d6;
+    }
+    #login-container button {
+      width: 100%;
+      padding: 14px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.3s;
+    }
+    #login-container button:hover {
+      background: #0056b3;
+    }
+    #login-container .bottom-text {
+      font-size: 14px;
+      color: gray;
+      margin-top: 15px;
+    }
+    #login-container .bottom-text a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    #login-container .bottom-text a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sign In Container -->
+  <div id="login-container">
+    <h1>ILLUSIONFROG</h1>
+    <h2>Sign in</h2>
+    <form onsubmit="return signIn()">
+      <input type="text" id="email" placeholder="E-Mail Address" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Sign in</button>
+    </form>
+    <p class="bottom-text">Don't have an account? <a href="signup.html">Sign up</a></p>
+  </div>
+  
+  <!-- Social Media UI Container (hidden initially) -->
+  <div id="social-container" style="display:none;">
+    <!-- Top Navigation -->
+    <div class="top-nav">
+      <div class="icons">
+        <span class="material-icons">account_circle</span>
+      </div>
+      <div class="search">
+        <input type="text" placeholder="Search...">
+        <span class="material-icons">search</span>
+      </div>
+      <div class="icons">
+        <span class="material-icons">notifications</span>
+      </div>
+    </div>
+    <!-- Content -->
+    <div class="content">
+      <div class="post">
+        <div class="post-header">
+          <img src="https://via.placeholder.com/40" alt="Ashwani">
+          <div class="user-info">
+            Ashwani
+            <span>Chirag Ashwani Pakki Yari</span>
+          </div>
+        </div>
+        <img src="https://i.ibb.co/fGNzXH8f/IMG-20250315-001055.jpg" alt="Post Image">
+        <div class="likes">❤️ 50K Likes</div>
+      </div>
+    </div>
+    <!-- Floating Buttons -->
+    <div class="floating-btn">
+      <span class="material-icons">add</span>
+    </div>
+    <div class="camera-btn">
+      <span class="material-icons">photo_camera</span>
+    </div>
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+      <div class="nav-item active">
+        <span class="material-icons">home</span>
+        <span>Home</span>
+      </div>
+      <div class="nav-item">
+        <span class="material-icons">chat</span>
+        <span>Chat</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function signIn() {
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+      // Pre-set credentials  
+      let correctEmail = "anticstoon11";
+      let correctPassword = "ashwani bhai11";
+      
+      if (email === correctEmail && password === correctPassword) {
+        // Hide the sign in container and display the social media UI container
+        document.getElementById("login-container").style.display = "none";
+        document.getElementById("social-container").style.display = "block";
+        return false; // Prevent actual form submission
+      } else {
+        alert("Incorrect Email or Password!");
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
